@@ -10,7 +10,7 @@ module.exports.getAll = (req,res) => {
 }
 
 module.exports.getById =  (req,res) => {
-  
+    // return res.status(200).json(req.params.id);
     Item.find({_id:req.params.id})
     .then(item => {
         console.log(item.length);
