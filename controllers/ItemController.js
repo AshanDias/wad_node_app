@@ -23,3 +23,11 @@ module.exports.getById =  (req,res) => {
 
     })
 }
+
+module.exports.post =  (req,res) => {
+    const { name, desc, image , price} = req.body;
+
+    const newItem = new Item({ name, desc, image , price})
+    newItem.save()
+    return  res.status(200).json(newItem);
+}
