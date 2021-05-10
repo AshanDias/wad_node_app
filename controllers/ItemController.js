@@ -25,18 +25,58 @@ module.exports.getById =  (req,res) => {
 }
 
 module.exports.post =  (req,res) => {
-    const { name, desc, image , price} = req.body;
+    try{
+        const { name, desc, image , price} = req.body;
 
-    const newItem = new Item({ name, desc, image , price})
-    newItem.save()
-    return  res.status(200).json(newItem);
+        const newItem = new Item({ name, desc, image , price})
+        newItem.save()
+        return  res.status(200).json(newItem);
+    }catch(e){
+        return res
+        .status(500)
+        .json("An Error occured !");
+    }
+   
 }
 
 
 module.exports.put = async  (req,res) => {
+    
     let requestedID = req.params.id;
-    let result = await Item.findById(requestedID);
-    result.set({name:req.body.name,desc:req.body.desc,image:req.body.image,price:req.body.price });
-    result = await result.save();
-    return  res.status(200).send(result);
+    try{
+        let result = await Item.findById(requestedID);
+        if (!result) {
+            return res
+              .status(404)
+              .json("Items you are looking to update does not exist on the DB");
+          }
+        
+        result.set({name:req.body.name,desc:req.body.desc,image:req.body.image,price:req.body.price });
+        result = await result.save();
+        return  res.status(200).json(result);
+    }catch(e){
+        return res
+        .status(500)
+        .json("Internal Server Error"+e);
+    }
+    
+}
+
+
+module.exports.delete = async  (req,res) => {
+
+    try{
+        let result = await Item.findOneAndDelete({_id: req.params.id});
+        if (!result) {
+            return res
+              .status(404)
+              .json("Items you are looking to update does not exist on the DB");
+          }
+        return  res.status(200).json(result);
+    }catch(e){
+        return res
+        .status(500)
+        .json("Internal Server Error"+e);
+    }
+
 }

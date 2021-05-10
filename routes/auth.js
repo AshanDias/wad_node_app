@@ -12,5 +12,6 @@ router.get('/admin/products', itemController.getAll);
 router.get('/admin/products/:id', itemController.getById);
 router.post('/admin/products', itemController.post);
 router.put('/admin/products/:id', itemController.put);
+router.delete('/admin/products/:id', itemController.delete);
 
 module.exports = router;
