@@ -8,6 +8,37 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 //Admin routes
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Item:
+ *       type: object
+ *       required:
+ *         - name
+ *         - desc
+ *         - image
+ *         - price
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The product name
+ *         desc:
+ *           type: string
+ *           description: The product description
+ *         image:
+ *           type: string
+ *           description: The image url
+ *         price:
+ *           type: string
+ *           description: The product price
+ *       example:
+ *         name: Test product
+ *         desc: Product description
+ *         image: https://picsum.photos/200/300
+ *         price: 970
+ */
+
 
 /**
  * @swagger
@@ -31,16 +62,36 @@ router.get('/admin/products', itemController.getAll);
  *         schema:
  *           type: string
  *         required: true
- *         description: The book id
+ *         description: The product id
  *     responses:
  *       200:
- *         description: The book description by id
+ *         description: The product description by id
  *       
  *       404:
- *         description: The book was not found
+ *         description: The product was not found
  */
 router.get('/admin/products/:id', itemController.getById);
 
+
+/**
+ * @swagger
+ * /api/admin/products:
+ *   post:
+ *     summary: Create new product 
+ *     parameters:
+ *       - in: body
+ *         name: Product 
+ *         schema:
+ *           type: object
+ *         required: true
+ *         description:  product object
+ *     responses:
+ *       200:
+ *         description: The product create
+ *       
+ *       404:
+ *         description: The product was not found
+ */
 router.post('/admin/products', itemController.post);
 router.put('/admin/products/:id', itemController.put);
 router.delete('/admin/products/:id', itemController.delete);

@@ -10,7 +10,6 @@ module.exports.getAll = (req,res) => {
 }
 
 module.exports.getById =  (req,res) => {
-    // return res.status(200).json(req.params.id);
     Item.find({_id:req.params.id})
     .then(item => {
         console.log(item.length);
@@ -25,6 +24,8 @@ module.exports.getById =  (req,res) => {
 }
 
 module.exports.post =  (req,res) => {
+    // return  res.status(200).json(req.body);
+
     try{
         const { name, desc, image , price} = req.body;
 
