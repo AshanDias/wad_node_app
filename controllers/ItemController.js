@@ -8,3 +8,18 @@ module.exports.getAll = (req,res) => {
         return res.status(200).json(item);
     })
 }
+
+module.exports.getById =  (req,res) => {
+  
+    Item.find({_id:req.params.id})
+    .then(item => {
+        console.log(item.length);
+        if(item.length<1) 
+        {
+            return res.status(400).json({message: 'No Records Found'})
+        }else{
+            return res.status(200).json(item);
+        }
+
+    })
+}

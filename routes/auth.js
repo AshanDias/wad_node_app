@@ -9,6 +9,8 @@ router.post('/login', authController.login);
 
 //Admin routes
 router.get('/admin/products', itemController.getAll);
+router.get('/admin/products/:id', itemController.getById);
+
 
 
 module.exports = router;
