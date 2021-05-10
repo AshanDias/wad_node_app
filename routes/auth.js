@@ -11,6 +11,6 @@ router.post('/login', authController.login);
 router.get('/admin/products', itemController.getAll);
 router.get('/admin/products/:id', itemController.getById);
 router.post('/admin/products', itemController.post);
-
+router.put('/admin/products/:id', itemController.put);
 
 module.exports = router;

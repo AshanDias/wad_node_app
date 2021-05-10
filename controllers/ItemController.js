@@ -31,3 +31,12 @@ module.exports.post =  (req,res) => {
     newItem.save()
     return  res.status(200).json(newItem);
 }
+
+
+module.exports.put = async  (req,res) => {
+    let requestedID = req.params.id;
+    let result = await Item.findById(requestedID);
+    result.set({name:req.body.name,desc:req.body.desc,image:req.body.image,price:req.body.price });
+    result = await result.save();
+    return  res.status(200).send(result);
+}
